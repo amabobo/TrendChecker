@@ -53,23 +53,21 @@ def start(filePath):
                 # 基準値との差を求めます。
                 r = abs(rgb[BGR_RED_IDX] - kjnRgb[RGB_RED_IDX])
                 g = abs(rgb[BGR_GREEN_IDX] - kjnRgb[RGB_GREEN_IDX])
-                b = abs(rgb[BGR_RED_IDX] - kjnRgb[RGB_BLUE_IDX])
+                b = abs(rgb[BGR_BLUE_IDX] - kjnRgb[RGB_BLUE_IDX])
                 diff = r + g + b
                 
                 # 暫定の基準値に更新します。
                 if (near == None or near > diff):
                     resultColor = color.name
                     near = diff
-                
 
             dicColor[resultColor] += 1
 
     print(bgrArray.shape)
 
     # カウント数をパーセントに置き換えます。
-    for color in dicColor:
-        dicColor[color] = dicColor[color] / (bgrArray.shape[0] * bgrArray.shape[1]) * 100
-
+    #for color in dicColor:
+    #    dicColor[color] = dicColor[color]
 
     print("カウントします。")
     
