@@ -68,6 +68,8 @@ class MainGUI(QtWidgets.QDialog):
       self.item = QGraphicsPixmapItem(QPixmap.fromImage(self.image))
       self.scene.addItem(self.item)
       self.ui.InputImage.setScene(self.scene)
+      self.ui.OutputImage.setScene(self.scene)
+
       self.ui.InputImage.setVisible(True)
       self.ui.ExtractionBtn.setVisible(True)
 
@@ -81,7 +83,17 @@ class MainGUI(QtWidgets.QDialog):
     
     # グラフに出力します。
     GraphUtil.createGraph(dicImageColor)
-    
+
+    cv_img = cv2.imread("./img.png")
+    cv_img = cv2.cvtColor(cv_img, cv2.COLOR_BGR2RGB)
+    cv_img = cv2.resize(cv_img, dsize=(440, 340))
+    height, width, dim = cv_img.shape
+    bytesPerLine = dim * width
+    self.scene = QGraphicsScene()
+    self.image = QImage(cv_img.data, width, height, bytesPerLine, QImage.Format_RGB888)
+    self.item = QGraphicsPixmapItem(QPixmap.fromImage(self.image))
+    self.scene.addItem(self.item)
+
 if __name__ == '__main__':
   app = QtWidgets.QApplication(sys.argv)
   window = MainGUI()

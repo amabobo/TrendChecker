@@ -3,10 +3,15 @@
 import cv2
 from EnumColors import EnumColors
 
+# BGR配列のインデックス
+BGR_RED_IDX = 2
+BGR_GREEN_IDX = 1
+BGR_BLUE_IDX = 0
+
 # RGB配列のインデックス
-RED_IDX = 0
-GREEN_IDX = 1
-BLUE_IDX = 2 
+RGB_RED_IDX = 0
+RGB_GREEN_IDX = 1
+RGB_BLUE_IDX = 2
 
 def start(filePath):    
 
@@ -24,14 +29,14 @@ def start(filePath):
                 EnumColors.COLOR_MAROON.name  :0}
             
     # 画像を読み込み、RGBを取得します。
-    rgbArray = cv2.imread(filePath)
+    bgrArray = cv2.imread(filePath)
     
     # RGBをチェックします。
-    for i in range(rgbArray.shape[0]):
-        for j in range(rgbArray.shape[1]):
+    for i in range(bgrArray.shape[0]):
+        for j in range(bgrArray.shape[1]):
            
             # 取得した色
-            rgb = rgbArray[i, j]
+            rgb = bgrArray[i, j]
             
             # 色結果
             resultColor = None
@@ -46,9 +51,9 @@ def start(filePath):
                 kjnRgb = color.rgb
                 
                 # 基準値との差を求めます。
-                r = abs(rgb[RED_IDX] - kjnRgb[RED_IDX])
-                g = abs(rgb[GREEN_IDX] - kjnRgb[GREEN_IDX])
-                b = abs(rgb[BLUE_IDX] - kjnRgb[BLUE_IDX])
+                r = abs(rgb[BGR_RED_IDX] - kjnRgb[RGB_RED_IDX])
+                g = abs(rgb[BGR_GREEN_IDX] - kjnRgb[RGB_GREEN_IDX])
+                b = abs(rgb[BGR_RED_IDX] - kjnRgb[RGB_BLUE_IDX])
                 diff = r + g + b
                 
                 # 暫定の基準値に更新します。
@@ -59,11 +64,11 @@ def start(filePath):
 
             dicColor[resultColor] += 1
 
-    print(rgbArray.shape)
+    print(bgrArray.shape)
 
     # カウント数をパーセントに置き換えます。
     for color in dicColor:
-        dicColor[color] = dicColor[color] / (rgbArray.shape[0] * rgbArray.shape[1]) * 100
+        dicColor[color] = dicColor[color] / (bgrArray.shape[0] * bgrArray.shape[1]) * 100
 
 
     print("カウントします。")
