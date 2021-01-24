@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1104</width>
+    <height>546</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QGraphicsView" name="InputImage">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>80</y>
+     <width>450</width>
+     <height>350</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+   <property name="backgroundBrush">
+    <brush brushstyle="NoBrush">
+     <color alpha="255">
+      <red>0</red>
+      <green>0</green>
+      <blue>0</blue>
+     </color>
+    </brush>
+   </property>
+   <property name="foregroundBrush">
+    <brush brushstyle="NoBrush">
+     <color alpha="255">
+      <red>0</red>
+      <green>0</green>
+      <blue>0</blue>
+     </color>
+    </brush>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ReferenceBtn">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>20</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>ファイル選択</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="FilePathTxt">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>251</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ExtractionBtn">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>230</y>
+     <width>111</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>抽出</string>
+   </property>
+  </widget>
+  <widget class="QGraphicsView" name="OutputImage">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>640</x>
+     <y>80</y>
+     <width>450</width>
+     <height>350</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+   <property name="backgroundBrush">
+    <brush brushstyle="NoBrush">
+     <color alpha="255">
+      <red>0</red>
+      <green>0</green>
+      <blue>0</blue>
+     </color>
+    </brush>
+   </property>
+   <property name="foregroundBrush">
+    <brush brushstyle="NoBrush">
+     <color alpha="255">
+      <red>0</red>
+      <green>0</green>
+      <blue>0</blue>
+     </color>
+    </brush>
+   </property>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>440</y>
+     <width>451</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QGraphicsView" name="InputImageMini1"/>
+    </item>
+    <item>
+     <widget class="QGraphicsView" name="InputImageMini2"/>
+    </item>
+    <item>
+     <widget class="QGraphicsView" name="InputImageMini3"/>
+    </item>
+    <item>
+     <widget class="QGraphicsView" name="InputImageMini4"/>
+    </item>
+    <item>
+     <widget class="QGraphicsView" name="InputImageMini5"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QPushButton" name="ReferenceBtn_2">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>20</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>フォルダ選択</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>ReferenceBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>showFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>329</x>
+     <y>31</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>495</x>
+     <y>74</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ExtractionBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>colorExtraction()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>566</x>
+     <y>242</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>646</x>
+     <y>244</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ReferenceBtn_2</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>showFolder()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>438</x>
+     <y>35</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>521</x>
+     <y>30</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>slot1()</slot>
+  <slot>showFile()</slot>
+  <slot>colorExtraction()</slot>
+  <slot>showFolder()</slot>
+ </slots>
+</ui>
