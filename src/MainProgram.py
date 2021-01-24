@@ -29,6 +29,11 @@ class MainGUI(QtWidgets.QDialog):
     ファイルパス格納用
     """
 
+    files = list()
+    """
+    ミニ画像のファイルパスリスト
+    """
+
     imageMiniObjList = []
     """
     画像表示用オブジェクト格納用配列(ミニ画像)
@@ -236,7 +241,7 @@ class MainGUI(QtWidgets.QDialog):
         self.ui.FilePathTxt.setText(self.filepath)
 
         # 選択したフォルダ内の画像ファイルを取得
-        files = glob.glob(self.filepath + '/*.jpg')
+        self.files = glob.glob(self.filepath + '/*.jpg')
 
         # ファイル配列用インデックス
         fileIdx = 0
@@ -244,10 +249,10 @@ class MainGUI(QtWidgets.QDialog):
         # imageMiniObjでループ
         for imageObj in self.imageMiniObjList:
 
-            if not files:
+            if not self.files:
                 break
 
-            if fileIdx >= len(files):
+            if fileIdx >= len(self.files):
                 break
 
             if fileIdx == 0:
@@ -256,7 +261,7 @@ class MainGUI(QtWidgets.QDialog):
                 self.cvImgList = []
 
                 # 画像読み込み
-                cv_img = cv2.imread(files[fileIdx])
+                cv_img = cv2.imread(self.files[fileIdx])
 
                 # 切り替え用配列に格納
                 self.cvImgList.append(cv_img)
@@ -286,7 +291,7 @@ class MainGUI(QtWidgets.QDialog):
 
             else:
                 # 画像読み込みとサイズ調整
-                cv_img = cv2.imread(files[fileIdx])
+                cv_img = cv2.imread(self.files[fileIdx])
 
                 # 切り替え用配列に格納
                 self.cvImgList.append(cv_img)
@@ -311,8 +316,12 @@ class MainGUI(QtWidgets.QDialog):
     #   抽出ボタンクリック関数   #
     #########################
     def colorExtraction(self):
+        
+        if not self.files:
+            self.files.append(self.filepath)
+        
         # 色を取得します。
-        dicImageColor = ImageUtil.start(self.ui.FilePathTxt.text())
+        dicImageColor = ImageUtil.start(self.files)
 
         # グラフに出力します。
         GraphUtil.createGraph(dicImageColor)
