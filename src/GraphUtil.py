@@ -10,17 +10,36 @@ from matplotlib.font_manager import FontProperties
 """
 def createGraph(colors):
     
+    # convert
+    sumAll = 0
+    for valColor in colors:
+        sumAll += int(colors[valColor])
+    
+    valSonota = 0
+    for valColor in colors:
+        if (int(colors[valColor]) / sumAll < 0.01) :
+            valSonota += int(colors[valColor])
+            colors[valColor] = 0
+        
+    
     # ラベルと色を設定します。
     gLabels = list()
     gColors = list()
     for color in EnumColors:
-        gLabels.append(color.nm)
-        gColors.append(color.code)
+        if (int(colors[color.name]) > 0) :
+            gLabels.append(color.nm)
+            gColors.append(color.code)
+        
+    #gLabels.append("sonota")
+    #gColors.append("#00000000")
         
     # 値を設定します。
     gValues = list()
     for valColor in colors:
-        gValues.append(colors[valColor])
+        if (int(colors[valColor]) > 0) :
+            gValues.append(colors[valColor])
+        
+    #gValues.append(valSonota)
 
     # フォントを指定します。
     fp = FontProperties(fname=r'C:\WINDOWS\Fonts\meiryob.ttc', size=10)
@@ -30,7 +49,7 @@ def createGraph(colors):
     
     # 描画
     fig, ax = plt.subplots()
-    patches, texts, autotexts = ax.pie(gValues, colors=gColors, labels=gLabels, autopct="%1.1f %%")
+    patches, texts, autotexts = ax.pie(gValues, colors=gColors, autopct='%1.1f%%', pctdistance=1.1, shadow=True, radius=1.6)
     
     # フォントを設定します。
     plt.setp(texts, FontProperties=fp)
