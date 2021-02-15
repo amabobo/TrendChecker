@@ -143,6 +143,9 @@ class MainGUI(QtWidgets.QDialog):
         :return: void
         """
 
+        # 初期化    
+        self.files = list()
+
         def scale_box(img, width, height):
             """
             アスペクト比を維持したまま画像サイズ調整
@@ -178,6 +181,8 @@ class MainGUI(QtWidgets.QDialog):
         if self.filepath == "":
             return
 
+        self.files.append(self.filepath)
+
         # 選択したパス情報を設定
         self.ui.FilePathTxt.setText(self.filepath)
 
@@ -203,6 +208,9 @@ class MainGUI(QtWidgets.QDialog):
         フォルダ選択ボタン押下時処理
         :return: void
         """
+        
+        # 初期化    
+        self.files = list()
         
         def scale_box(img, width, height):
             """
@@ -316,10 +324,7 @@ class MainGUI(QtWidgets.QDialog):
     #   抽出ボタンクリック関数   #
     #########################
     def colorExtraction(self):
-        
-        if not self.files:
-            self.files.append(self.filepath)
-        
+
         # 色を取得します。
         dicImageColor = ImageUtil.start(self.files)
 
