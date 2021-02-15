@@ -324,12 +324,12 @@ class MainGUI(QtWidgets.QDialog):
         dicImageColor = ImageUtil.start(self.files)
 
         # グラフに出力します。
-        GraphUtil.createGraph(dicImageColor)
+        fileName = GraphUtil.createGraph(dicImageColor)
 
         # グラフの画像を表示します。
-        cv_img = cv2.imread("./img.png")
+        cv_img = cv2.imread("./img/" + fileName)
         cv_img = cv2.cvtColor(cv_img, cv2.COLOR_BGR2RGB)
-        cv_img = cv2.resize(cv_img, dsize=(440, 340))
+        #cv_img = cv2.resize(cv_img, dsize=(440, 340))
         height, width, dim = cv_img.shape
         bytesPerLine = dim * width
         self.scene = QGraphicsScene()

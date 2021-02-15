@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 from EnumColors import EnumColors
 from matplotlib.font_manager import FontProperties
+from datetime import datetime
 
 """
 グラフを画像ファイルに出力します。
@@ -42,7 +43,7 @@ def createGraph(colors):
     #gValues.append(valSonota)
 
     # フォントを指定します。
-    fp = FontProperties(fname=r'C:\WINDOWS\Fonts\meiryob.ttc', size=10)
+    fp = FontProperties(fname='C:\WINDOWS\Fonts\meiryo.ttf', size=10)
     
     # グラフの描画先の準備
     fig = plt.figure()
@@ -57,10 +58,16 @@ def createGraph(colors):
     # グラフを表示します。
     plt.show()
 
-    # 画像を保存します。
-    fig.savefig("img.png")
+    # 日時を取得
+    dt = datetime.now()
 
-    return "img.png"
+    # ファイル名を設定
+    fileName = "img_" + dt.strftime('%Y') + dt.strftime('%m') + dt.strftime('%d') + dt.strftime('%H') + dt.strftime('%M') + dt.strftime('%S') + ".png"
+
+    # 画像を保存します。
+    fig.savefig("img/" + fileName)
+
+    return fileName
 
 if __name__ == '__main__':
     
