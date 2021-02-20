@@ -325,13 +325,13 @@ class MainGUI(QtWidgets.QDialog):
     #########################
     def colorExtraction(self):
 
-        # 色を取得します。
+        # 色を取得
         dicImageColor = ImageUtil.start(self.files)
 
-        # グラフに出力します。
+        # グラフに出力
         fileName = GraphUtil.createGraph(dicImageColor)
 
-        # グラフの画像を表示します。
+        # グラフの画像を表示
         cv_img = cv2.imread("./img/" + fileName)
         cv_img = cv2.cvtColor(cv_img, cv2.COLOR_BGR2RGB)
         #cv_img = cv2.resize(cv_img, dsize=(440, 340))

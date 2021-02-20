@@ -14,7 +14,12 @@ RGB_GREEN_IDX = 1
 RGB_BLUE_IDX = 2
 
 def start(files):    
+    """
+    画像ファイルから色の割合を取得
+    :param files: ファイル群
+    """
 
+    # 全色のDictonaryを作成
     dicColor = {EnumColors.COLOR_WHITE.name   :0,
                 EnumColors.COLOR_OLIVE.name   :0,
                 EnumColors.COLOR_YELLOW.name  :0,
@@ -27,15 +32,16 @@ def start(files):
                 EnumColors.COLOR_PURPLE.name  :0,
                 EnumColors.COLOR_BLACK.name   :0,
                 EnumColors.COLOR_MAROON.name  :0}
-            
+
+    # 全ファイルを処理
     for filePath in files:
     
         print("loadStart:" + filePath)
 
-        # 画像を読み込み、RGBを取得します。
+        # 画像を読み込み、RGBを取得
         bgrArray = cv2.imread(filePath)
     
-        # RGBをチェックします。
+        # RGBをチェック
         for i in range(bgrArray.shape[0]):
             for j in range(bgrArray.shape[1]):
                
@@ -48,19 +54,19 @@ def start(files):
                 # 基準値にどれぐらい近いか　0に近いほど近い 
                 near = None;
     
-                # 基準値の判定を行います。
+                # 基準値の判定
                 for color in EnumColors:
                     
-                    # 基準値を取得します。
+                    # 基準値を取得
                     kjnRgb = color.rgb
                     
-                    # 基準値との差を求めます。
+                    # 基準値との差を算出
                     r = abs(rgb[BGR_RED_IDX] - kjnRgb[RGB_RED_IDX])
                     g = abs(rgb[BGR_GREEN_IDX] - kjnRgb[RGB_GREEN_IDX])
                     b = abs(rgb[BGR_BLUE_IDX] - kjnRgb[RGB_BLUE_IDX])
                     diff = r + g + b
                     
-                    # 暫定の基準値に更新します。
+                    # 暫定の基準値に更新
                     if (near == None or near > diff):
                         resultColor = color.name
                         near = diff
@@ -75,7 +81,7 @@ def start(files):
 
     print("↓count↓")
     
-    # 色の割合を出力します。
+    # 色の割合を出力
     for color in dicColor: 
         print(str(color) + ":" + str(dicColor[color]))
     

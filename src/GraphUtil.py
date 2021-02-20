@@ -6,11 +6,12 @@ from EnumColors import EnumColors
 from matplotlib.font_manager import FontProperties
 from datetime import datetime
 
-"""
-グラフを画像ファイルに出力します。
-"""
 def createGraph(colors):
-    
+    """
+    グラフを画像ファイルに出力
+    :param colors: Dictonary
+    """
+
     # 合計
     sumAll = 0
     for valColor in colors:
@@ -42,7 +43,7 @@ def createGraph(colors):
     #gColors.append("0.9")
     #gValues.append(valSonota)
 
-    # フォントを指定します。
+    # フォントを指定
     fp = FontProperties(fname='C:\WINDOWS\Fonts\meiryo.ttf', size=8)
     
     # グラフの描画先の準備
@@ -52,13 +53,13 @@ def createGraph(colors):
     fig, ax = plt.subplots()
     patches, texts, autotexts = ax.pie(gValues, colors=gColors, autopct='%1.1f%%', pctdistance=1.12, wedgeprops={'linewidth': 1, 'edgecolor':"black"}, radius=1.4, startangle=90, counterclock=False)
     
-    # フォントを設定します。
+    # フォントを設定
     plt.setp(texts, FontProperties=fp)
     
     # 凡例を設定
     #plt.legend(gLabels, fancybox=True, loc='upper left', bbox_to_anchor=(1.05, 1.05), borderaxespad=0)
 
-    # グラフを表示します。
+    # グラフを表示
     plt.show()
 
     # 日時を取得
@@ -67,24 +68,7 @@ def createGraph(colors):
     # ファイル名を設定
     fileName = "img_" + dt.strftime('%Y') + dt.strftime('%m') + dt.strftime('%d') + dt.strftime('%H') + dt.strftime('%M') + dt.strftime('%S') + ".png"
 
-    # 画像を保存します。
+    # 画像を保存
     fig.savefig("img/" + fileName)
 
     return fileName
-
-if __name__ == '__main__':
-    
-    dicColor = {EnumColors.COLOR_WHITE   :100,
-                EnumColors.COLOR_OLIVE   :10,
-                EnumColors.COLOR_YELLOW  :10,
-                EnumColors.COLOR_FUCHSIA :30,
-                EnumColors.COLOR_AQUA    :10,
-                EnumColors.COLOR_RED     :10,
-                EnumColors.COLOR_GRAY    :60,
-                EnumColors.COLOR_BLUE    :10,
-                EnumColors.COLOR_GREEN   :10,
-                EnumColors.COLOR_PURPLE  :10,
-                EnumColors.COLOR_BLACK   :10,
-                EnumColors.COLOR_MAROON  :10}
-    
-    createGraph(dicColor)

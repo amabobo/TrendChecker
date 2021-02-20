@@ -2,9 +2,11 @@
 
 from enum import Enum
 
-# 色
-"https://note.cman.jp/color/base_color.cgi"
+# https://note.cman.jp/color/base_color.cgi
 class EnumColors(Enum):
+    """
+    色定義Enum
+    """
     COLOR_WHITE   = (0 , [255, 255, 255], "#ffffff", "白")
     COLOR_OLIVE   = (1 , [128, 128,   0], "#808000", "オリーブ")
     COLOR_YELLOW  = (2 , [255, 255,   0], "#ffff00", "黄")
@@ -17,20 +19,29 @@ class EnumColors(Enum):
     COLOR_PURPLE  = (9 , [128,   0, 128], "#800080", "紫")
     COLOR_BLACK   = (10, [  0,   0,   0], "#000000", "黒")
     COLOR_MAROON  = (11, [128,   0,   0], "#800000", "茶")
-    
+
     @classmethod
     def value_of(cls, targetName):
+        """
+        文字列から該当のEnumColorsを取得
+        :param targetName: 取得したいEnumColorsのname
+        :return: 該当のEnumColors
+        """
         for e in EnumColors:
             if e.name == targetName:
                 return e
         raise ValueError('{} は有効なEnumではありません'.format(targetName))
-        
+
     def __init__(self, id, rgb, code, nm):
+        """
+        コンストラクタ
+        :param id: 一意ID
+        :param rgb: RGB
+        :param code: カラーコード
+        :param nm: 名前
+        """
         self.id = id
         self.rgb = rgb
         self.code = code
         self.nm = nm
     
-if __name__ == "__main__":
-    print('#=== ja ===#')
-    print(EnumColors.COLOR_RED.id)
