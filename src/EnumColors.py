@@ -18,6 +18,13 @@ class EnumColors(Enum):
     COLOR_BLACK   = (10, [  0,   0,   0], "#000000", "黒")
     COLOR_MAROON  = (11, [128,   0,   0], "#800000", "茶")
     
+    @classmethod
+    def value_of(cls, targetName):
+        for e in EnumColors:
+            if e.name == targetName:
+                return e
+        raise ValueError('{} は有効なEnumではありません'.format(targetName))
+        
     def __init__(self, id, rgb, code, nm):
         self.id = id
         self.rgb = rgb

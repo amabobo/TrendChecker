@@ -11,50 +11,53 @@ from datetime import datetime
 """
 def createGraph(colors):
     
-    # convert
+    # 合計
     sumAll = 0
     for valColor in colors:
         sumAll += int(colors[valColor])
     
+    # その他
     valSonota = 0
     for valColor in colors:
-        if (int(colors[valColor]) / sumAll < 0.01) :
+        if (int(colors[valColor]) / sumAll < 0.025) :
             valSonota += int(colors[valColor])
             colors[valColor] = 0
         
+    # 並べ替え
+    sortColors = sorted(colors.items(), key=lambda x:x[1], reverse=True)
     
-    # ラベルと色を設定します。
+    # ラベル、色、値を設定
     gLabels = list()
     gColors = list()
-    for color in EnumColors:
-        if (int(colors[color.name]) > 0) :
-            gLabels.append(color.nm)
-            gColors.append(color.code)
-        
-    #gLabels.append("sonota")
-    #gColors.append("#00000000")
-        
-    # 値を設定します。
     gValues = list()
-    for valColor in colors:
-        if (int(colors[valColor]) > 0) :
-            gValues.append(colors[valColor])
-        
+    for key, value in sortColors :
+        if (int(colors[key]) > 0) :
+            enum = EnumColors.value_of(key)
+            gLabels.append(enum.nm)
+            gColors.append(enum.code)
+            gValues.append(value)
+            
+    # その他を設定         
+    #gLabels.append("その他")
+    #gColors.append("0.9")
     #gValues.append(valSonota)
 
     # フォントを指定します。
-    fp = FontProperties(fname='C:\WINDOWS\Fonts\meiryo.ttf', size=10)
+    fp = FontProperties(fname='C:\WINDOWS\Fonts\meiryo.ttf', size=8)
     
     # グラフの描画先の準備
     fig = plt.figure()
     
-    # 描画
+    # 描画設定
     fig, ax = plt.subplots()
-    patches, texts, autotexts = ax.pie(gValues, colors=gColors, autopct='%1.1f%%', pctdistance=1.1, shadow=True, radius=1.6)
+    patches, texts, autotexts = ax.pie(gValues, colors=gColors, autopct='%1.1f%%', pctdistance=1.12, wedgeprops={'linewidth': 1, 'edgecolor':"black"}, radius=1.4, startangle=90, counterclock=False)
     
     # フォントを設定します。
     plt.setp(texts, FontProperties=fp)
-        
+    
+    # 凡例を設定
+    #plt.legend(gLabels, fancybox=True, loc='upper left', bbox_to_anchor=(1.05, 1.05), borderaxespad=0)
+
     # グラフを表示します。
     plt.show()
 
