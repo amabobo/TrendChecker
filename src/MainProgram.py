@@ -332,7 +332,7 @@ class MainGUI(QtWidgets.QDialog):
         fileName = GraphUtil.createGraph(dicImageColor)
 
         # グラフの画像を表示
-        cv_img = cv2.imread("./img/" + fileName)
+        cv_img = cv2.imread("../graph_img/" + fileName)
         cv_img = cv2.cvtColor(cv_img, cv2.COLOR_BGR2RGB)
         #cv_img = cv2.resize(cv_img, dsize=(440, 340))
         height, width, dim = cv_img.shape

@@ -5,6 +5,7 @@ import matplotlib as mpl
 from EnumColors import EnumColors
 from matplotlib.font_manager import FontProperties
 from datetime import datetime
+import os
 
 def createGraph(colors):
     """
@@ -62,13 +63,17 @@ def createGraph(colors):
     # グラフを表示
     plt.show()
 
+    # ディレクトリ作成
+    if not os.path.isdir("../graph_img"):
+        os.makedirs("../graph_img")
+
     # 日時を取得
     dt = datetime.now()
 
     # ファイル名を設定
-    fileName = "img_" + dt.strftime('%Y') + dt.strftime('%m') + dt.strftime('%d') + dt.strftime('%H') + dt.strftime('%M') + dt.strftime('%S') + ".png"
+    fileName = "graph_img_" + dt.strftime('%Y') + dt.strftime('%m') + dt.strftime('%d') + dt.strftime('%H') + dt.strftime('%M') + dt.strftime('%S') + ".png"
 
     # 画像を保存
-    fig.savefig("img/" + fileName)
+    fig.savefig("../graph_img/" + fileName)
 
     return fileName
