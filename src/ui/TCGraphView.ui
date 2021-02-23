@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>frmGraphView</class>
+ <widget class="QWidget" name="frmGraphView">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>430</width>
+    <height>370</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>430</width>
+    <height>370</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>430</width>
+    <height>370</height>
+   </size>
+  </property>
+  <property name="font">
+   <font>
+    <family>Meiryo UI</family>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>TrendChecker - Graph</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>C:/Users/miosi/Downloads/グラフアイコン.png</normaloff>C:/Users/miosi/Downloads/グラフアイコン.png</iconset>
+  </property>
+  <widget class="QWidget" name="horizontalLayoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>50</y>
+     <width>411</width>
+     <height>311</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Meiryo UI</family>
+    </font>
+   </property>
+   <layout class="QHBoxLayout" name="mainGraphLayout">
+    <item>
+     <widget class="QGraphicsView" name="viewGraphImage">
+      <property name="font">
+       <font>
+        <family>Meiryo UI</family>
+       </font>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QPushButton" name="btnBack">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>75</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>戻る</string>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>C:/Users/miosi/Downloads/Uターン矢印 2.png</normaloff>C:/Users/miosi/Downloads/Uターン矢印 2.png</iconset>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>btnBack</sender>
+   <signal>clicked()</signal>
+   <receiver>frmGraphView</receiver>
+   <slot>back_click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>58</x>
+     <y>25</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>140</x>
+     <y>18</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>file_select_click()</slot>
+  <slot>folder_select_click()</slot>
+  <slot>graph_display_click()</slot>
+  <slot>back_click()</slot>
+ </slots>
+</ui>

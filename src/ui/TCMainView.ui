@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>frmMainView</class>
+ <widget class="QWidget" name="frmMainView">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>434</width>
+    <height>472</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>434</width>
+    <height>472</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>434</width>
+    <height>472</height>
+   </size>
+  </property>
+  <property name="font">
+   <font>
+    <family>Meiryo UI</family>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>TrendChecker - Main</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>C:/Users/miosi/Downloads/グラフアイコン.png</normaloff>C:/Users/miosi/Downloads/グラフアイコン.png</iconset>
+  </property>
+  <widget class="QWidget" name="horizontalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>411</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Meiryo UI</family>
+    </font>
+   </property>
+   <layout class="QHBoxLayout" name="headerLayout">
+    <item>
+     <widget class="QLineEdit" name="txtPath">
+      <property name="font">
+       <font>
+        <family>Meiryo UI</family>
+       </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnFileSelect">
+      <property name="font">
+       <font>
+        <family>Meiryo UI</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>ファイル選択</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>C:/Users/miosi/Downloads/イメージファイルアイコン.png</normaloff>C:/Users/miosi/Downloads/イメージファイルアイコン.png</iconset>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnFolderSelect">
+      <property name="font">
+       <font>
+        <family>Meiryo UI</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>フォルダ選択</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>C:/Users/miosi/Downloads/フォルダアイコン14.png</normaloff>C:/Users/miosi/Downloads/フォルダアイコン14.png</iconset>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnGraphDisplay">
+      <property name="font">
+       <font>
+        <family>Meiryo UI</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>グラフ表示</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>C:/Users/miosi/Downloads/円グラフのフリーアイコン.png</normaloff>C:/Users/miosi/Downloads/円グラフのフリーアイコン.png</iconset>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>60</y>
+     <width>411</width>
+     <height>311</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Meiryo UI</family>
+    </font>
+   </property>
+   <layout class="QHBoxLayout" name="mainImageLayout">
+    <item>
+     <widget class="QGraphicsView" name="viewMainImage">
+      <property name="font">
+       <font>
+        <family>Meiryo UI</family>
+       </font>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget_3">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>380</y>
+     <width>411</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Meiryo UI</family>
+    </font>
+   </property>
+   <layout class="QHBoxLayout" name="subImageLayout">
+    <item>
+     <widget class="QGraphicsView" name="viewMiniImage1">
+      <property name="font">
+       <font>
+        <family>Meiryo UI</family>
+       </font>
+      </property>
+      <property name="cursor" stdset="0">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGraphicsView" name="viewMiniImage2">
+      <property name="font">
+       <font>
+        <family>Meiryo UI</family>
+       </font>
+      </property>
+      <property name="cursor" stdset="0">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGraphicsView" name="viewMiniImage3">
+      <property name="font">
+       <font>
+        <family>Meiryo UI</family>
+       </font>
+      </property>
+      <property name="cursor" stdset="0">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGraphicsView" name="viewMiniImage4">
+      <property name="font">
+       <font>
+        <family>Meiryo UI</family>
+       </font>
+      </property>
+      <property name="cursor" stdset="0">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGraphicsView" name="viewMiniImage5">
+      <property name="font">
+       <font>
+        <family>Meiryo UI</family>
+       </font>
+      </property>
+      <property name="cursor" stdset="0">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>btnFileSelect</sender>
+   <signal>clicked()</signal>
+   <receiver>frmMainView</receiver>
+   <slot>file_select_click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>176</x>
+     <y>23</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>237</x>
+     <y>9</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnFolderSelect</sender>
+   <signal>clicked()</signal>
+   <receiver>frmMainView</receiver>
+   <slot>folder_select_click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>289</x>
+     <y>31</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>323</x>
+     <y>56</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnGraphDisplay</sender>
+   <signal>clicked()</signal>
+   <receiver>frmMainView</receiver>
+   <slot>graph_display_click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>362</x>
+     <y>30</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>237</x>
+     <y>52</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>file_select_click()</slot>
+  <slot>folder_select_click()</slot>
+  <slot>graph_display_click()</slot>
+ </slots>
+</ui>

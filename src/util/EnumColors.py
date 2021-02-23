@@ -2,11 +2,15 @@
 
 from enum import Enum
 
-# https://note.cman.jp/color/base_color.cgi
+
 class EnumColors(Enum):
     """
     色定義Enum
+
+    色定義参考：　https://note.cman.jp/color/base_color.cgi
     """
+
+    #　　 Enum名   = (ID,      RGB,       カラーコード, 名前)
     COLOR_WHITE   = (0 , [255, 255, 255], "#ffffff", "白")
     COLOR_OLIVE   = (1 , [128, 128,   0], "#808000", "オリーブ")
     COLOR_YELLOW  = (2 , [255, 255,   0], "#ffff00", "黄")
@@ -44,4 +48,3 @@ class EnumColors(Enum):
         self.rgb = rgb
         self.code = code
         self.nm = nm
-    
