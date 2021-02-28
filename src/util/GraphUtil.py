@@ -56,8 +56,8 @@ class GraphUtil:
         img_util = ImageUtil()
 
         # 進捗更新 5
-        self.progress += 5
-        proc_thread.prog_signal.emit(self.progress)
+        #self.progress += 5
+        #proc_thread.prog_signal.emit(self.progress)
 
         # 全ファイルを処理
         for file_path in file_paths:
@@ -78,7 +78,7 @@ class GraphUtil:
                     result_color = None
 
                     # 基準値にどれぐらい近いか　0に近いほど近い
-                    near = None;
+                    near = None
 
                     # 基準値の判定
                     for color in EnumColors:
@@ -98,13 +98,17 @@ class GraphUtil:
                             near = diff
 
                     color_dic[result_color] += 1
+                    
+                # 進捗更新
+                num = 100 / len(range(bgr_array.shape[0])) / len(file_paths) 
+                self.progress += num
+                proc_thread.prog_signal.emit(self.progress)
 
             print("loadEnd  :" + file_path)
 
             # 進捗更新 85
-            self.progress += 80 / len(file_paths)
-            proc_thread.prog_signal.emit(self.progress)
-
+            #self.progress += 80 / len(file_paths)
+            #proc_thread.prog_signal.emit(self.progress)
 
         print("↓count↓")
 
@@ -135,8 +139,8 @@ class GraphUtil:
                 color_dic[val_color] = 0
 
         # 進捗更新 90
-        self.progress += 5
-        proc_thread.prog_signal.emit(self.progress)
+        #self.progress += 5
+        #proc_thread.prog_signal.emit(self.progress)
 
 
         # 並べ替え
@@ -154,7 +158,7 @@ class GraphUtil:
                 gValues.append(value)
 
         # 進捗更新 95
-        self.progress += 5
+        #self.progress += 5
         proc_thread.prog_signal.emit(self.progress)
 
         # その他を設定
@@ -204,7 +208,7 @@ class GraphUtil:
         fig.savefig(file_full_path)
 
         # 進捗更新 100
-        self.progress += 5
-        proc_thread.prog_signal.emit(self.progress)
+        #self.progress += 5
+        #proc_thread.prog_signal.emit(self.progress)
 
         return file_full_path
