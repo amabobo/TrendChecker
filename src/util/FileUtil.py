@@ -1,6 +1,7 @@
 import os
 import tkinter
 import glob
+import shutil
 from tkinter import filedialog
 
 
@@ -60,12 +61,38 @@ class FileUtil:
 
     @staticmethod
     def create_dir(path):
+        """
+        ディレクトリを生成する
+        """
 
         # ディレクトリ存在チェック
         if not os.path.isdir(path):
 
             # 存在しない場合作成
             os.makedirs(path)
+
+    @staticmethod
+    def delete_dir(path):
+        """
+        ディレクトリを削除する
+        """
+
+        # ディレクトリ存在チェック
+        if os.path.isdir(path):
+
+            # 存在する場合削除
+            shutil.rmtree(path)
+
+    @staticmethod
+    def get_file_name(path):
+        """
+        ファイル名を取得
+        :return: ファイル名
+        """
+
+        file_name = os.path.basename(path)
+
+        return file_name
 
 
 

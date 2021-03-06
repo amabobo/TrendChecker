@@ -44,9 +44,19 @@ class TrendCheckerMainView(QMainWindow):
     グラフ操作クラス
     """
 
-    image_paths = list()
+    normal_image_paths = list()
     """
-    画像パス格納配列
+    通常画像パス格納配列
+    """
+
+    analysis_image_paths = list()
+    """
+    解析画像パス格納配列
+    """
+
+    cutout_image_paths = list()
+    """
+    切り抜き画像パス格納配列
     """
 
     mini_image_objects = list()
@@ -81,6 +91,7 @@ class TrendCheckerMainView(QMainWindow):
             mini_image_obj.installEventFilter(self)
 
         self.ui.btnGraphDisplay.setEnabled(False)
+        self.ui.chbMarkClothes.setEnabled(False)
 
         # シグナルを受信する関数を指定
         self.graph_proc_th.end_signal.connect(self.graph_proc_end)
@@ -115,7 +126,10 @@ class TrendCheckerMainView(QMainWindow):
                     self.image_util = ImageUtil()
 
                 # シーン取得
-                scene = self.image_util.create_scene(self.image_paths[push_num], 400, 300)
+                if self.ui.chbMarkClothes.checkState():
+                    scene = self.image_util.create_scene(self.analysis_image_paths[push_num], 400, 300)
+                else:
+                    scene = self.image_util.create_scene(self.normal_image_paths[push_num], 400, 300)
 
                 # 表示領域にシーンを設定
                 self.ui.viewMainImage.setScene(scene)
@@ -145,10 +159,8 @@ class TrendCheckerMainView(QMainWindow):
         # 配列、オブジェクト初期化
         self.clear()
 
-        self.ui.btnGraphDisplay.setEnabled(True)
-
         # 画像パス配列にパスを格納
-        self.image_paths.append(file_path)
+        self.normal_image_paths.append(file_path)
 
         # 選択したパス情報を設定
         self.ui.txtPath.setText(file_path)
@@ -159,6 +171,10 @@ class TrendCheckerMainView(QMainWindow):
         # 表示領域にシーンを設定
         self.ui.viewMainImage.setScene(scene)
         self.ui.viewMainImage.setVisible(True)
+
+        # ボタン有効化
+        self.ui.btnGraphDisplay.setEnabled(True)
+        self.ui.chbMarkClothes.setEnabled(True)
 
     def folder_select_click(self):
         """
@@ -173,59 +189,32 @@ class TrendCheckerMainView(QMainWindow):
         if self.image_util is None:
             self.image_util = ImageUtil()
 
-        # ファイルのパスを取得
+        # フォルダのパスを取得
         folder_path = self.file_util.get_folder_path()
 
-        # ファイル選択チェック
+        # フォルダ選択チェック
         if folder_path == "":
             return
 
         # 配列、オブジェクト初期化
         self.clear()
 
-        self.ui.btnGraphDisplay.setEnabled(True)
-
         # 選択したパス情報を設定
         self.ui.txtPath.setText(folder_path)
 
         # 選択したフォルダ内の画像パスを取得
-        self.image_paths = self.file_util.get_image_paths(self.ui.txtPath.text())
+        self.normal_image_paths = self.file_util.get_image_paths(self.ui.txtPath.text())
 
         # 画像パス存在チェック
-        if len(self.image_paths) == 0:
+        if len(self.normal_image_paths) == 0:
             return
 
-        # インデックス
-        mini_image_idx = 0
+        # 画像をセット
+        self.set_mini_images(self.normal_image_paths)
 
-        # ミニ画像オブジェクトでループ
-        for mini_image_obj in self.mini_image_objects:
-
-            if not self.image_paths:
-                break
-
-            if mini_image_idx >= len(self.image_paths):
-                break
-
-            # 初回ループチェック
-            if mini_image_idx == 0:
-
-                # 初回の場合はメイン画像、ミニ画像両方にセット
-                main_scene = self.image_util.create_scene(self.image_paths[mini_image_idx], 400, 300)
-                mini_scene = self.image_util.create_scene(self.image_paths[mini_image_idx], 70, 70)
-
-                self.ui.viewMainImage.setScene(main_scene)
-                self.ui.viewMainImage.setVisible(True)
-                mini_image_obj.setScene(mini_scene)
-                mini_image_obj.setVisible(True)
-
-            else:
-                mini_scene = self.image_util.create_scene(self.image_paths[mini_image_idx], 70, 70)
-                mini_image_obj.setScene(mini_scene)
-                mini_image_obj.setVisible(True)
-
-            # インデックスを次に進める
-            mini_image_idx += 1
+        # ボタン有効化
+        self.ui.btnGraphDisplay.setEnabled(True)
+        self.ui.chbMarkClothes.setEnabled(True)
 
     def graph_display_click(self):
         """
@@ -233,7 +222,10 @@ class TrendCheckerMainView(QMainWindow):
         """
 
         # グラフ処理スレッド起動
-        self.graph_proc_th.process_start(self.image_paths)
+        if self.ui.chbMarkClothes.checkState():
+            self.graph_proc_th.process_start(self.analysis_image_paths)
+        else:
+            self.graph_proc_th.process_start(self.normal_image_paths)
 
         # ProgressView存在チェック
         if self.prog_view is None:
@@ -260,18 +252,130 @@ class TrendCheckerMainView(QMainWindow):
         graph_view.show()
 
     def graph_progress(self, progress):
+        """
+        プログレスバー更新
+        """
         self.prog_view.set_progress(progress)
+
+    def clothes_change_toggle(self, is_checked):
+        """
+        服認識トグル変更時処理
+        """
+
+        # チェックした時
+        if is_checked:
+
+            # ImageUtil存在チェック
+            if self.image_util is None:
+                self.image_util = ImageUtil()
+
+            # FileUtil存在チェック
+            if self.file_util is None:
+                self.file_util = FileUtil()
+
+            # すでに解析画像が存在する場合はそれを使う
+            if not self.analysis_image_paths:
+                # 画像解析
+                self.image_util.analysis_image(self.normal_image_paths)
+
+                # 選択したフォルダ内の画像パスを取得
+                self.analysis_image_paths = self.file_util.get_image_paths("./temp_work/analysis_img")
+
+                # 解析画像存在チェック
+                if len(self.analysis_image_paths) == 0:
+                    self.ui.chbMarkClothes.setChecked(False)
+                    return
+
+            # 通常画像のパス以外をクリア
+            self.clear_at_analysis()
+
+            # 画像をセット
+            self.set_mini_images(self.analysis_image_paths)
+
+        # チェック外した時
+        else:
+            # 通常画像のパス以外をクリア
+            self.clear_at_analysis()
+
+            # 画像をセット
+            self.set_mini_images(self.normal_image_paths)
+
+    def set_mini_images(self, file_paths):
+        """
+        ミニ画像用オブジェクトに画像をセットする
+        """
+        # インデックス
+        mini_image_idx = 0
+
+        # ミニ画像オブジェクトでループ
+        for mini_image_obj in self.mini_image_objects:
+
+            if not file_paths:
+                break
+
+            if mini_image_idx >= len(file_paths):
+                break
+
+            # 初回ループチェック
+            if mini_image_idx == 0:
+
+                # 初回の場合はメイン画像、ミニ画像両方にセット
+                main_scene = self.image_util.create_scene(file_paths[mini_image_idx], 400, 300)
+                mini_scene = self.image_util.create_scene(file_paths[mini_image_idx], 70, 70)
+
+                self.ui.viewMainImage.setScene(main_scene)
+                self.ui.viewMainImage.setVisible(True)
+                mini_image_obj.setScene(mini_scene)
+                mini_image_obj.setVisible(True)
+
+            else:
+                mini_scene = self.image_util.create_scene(file_paths[mini_image_idx], 70, 70)
+                mini_image_obj.setScene(mini_scene)
+                mini_image_obj.setVisible(True)
+
+            # インデックスを次に進める
+            mini_image_idx += 1
 
     def clear(self):
         """
         クリア処理
         """
+
         # ImageUtil存在チェック
         if self.image_util is None:
             self.image_util = ImageUtil()
 
+        # FileUtil存在チェック
+        if self.file_util is None:
+            self.file_util = FileUtil()
+
         # 画像パス配列を初期化
-        self.image_paths = list()
+        self.normal_image_paths = list()
+        self.analysis_image_paths = list()
+
+        # オブジェクト初期化
+        self.ui.chbMarkClothes.setChecked(False)
+
+        blank_scene = self.image_util.get_blank_scene()
+
+        self.ui.viewMainImage.setVisible(False)
+        self.ui.viewMainImage.setScene(blank_scene)
+
+        for mini_image_obj in self.mini_image_objects:
+            mini_image_obj.setVisible(False)
+            mini_image_obj.setScene(blank_scene)
+
+        # 作業ディレクトリ削除
+        self.file_util.delete_dir("./temp_work")
+
+    def clear_at_analysis(self):
+        """
+        解析時のクリア処理
+        """
+
+        # ImageUtil存在チェック
+        if self.image_util is None:
+            self.image_util = ImageUtil()
 
         # オブジェクト初期化
         blank_scene = self.image_util.get_blank_scene()
@@ -283,6 +387,12 @@ class TrendCheckerMainView(QMainWindow):
             mini_image_obj.setVisible(False)
             mini_image_obj.setScene(blank_scene)
 
+    def closeEvent(self, event):
+        """
+        画面クローズ時処理
+        """
+        # 初期化して閉じる
+        self.clear()
 
 class TrendCheckerGraphView(QtWidgets.QDialog):
     """
@@ -293,6 +403,7 @@ class TrendCheckerGraphView(QtWidgets.QDialog):
         """
         コンストラクタ
         """
+
         # UI呼び出し
         QtWidgets.QDialog.__init__(self, parent)
         self.ui = Ui_frmGraphView()
@@ -336,13 +447,14 @@ class TrendCheckerProgressView(QtWidgets.QDialog):
         """
         コンストラクタ
         """
+
         # UI呼び出し
         QtWidgets.QDialog.__init__(self, parent)
         self.ui = Ui_frmProgressView()
         self.ui.setupUi(self)
 
         # ラベルにロード時のgifをセット
-        self.movie = QMovie("img/loading1.gif")
+        self.movie = QMovie("img/loading2.gif")
         self.ui.lblLoad.setMovie(self.movie)
         self.movie.start()
 

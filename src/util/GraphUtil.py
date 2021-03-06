@@ -120,11 +120,11 @@ class GraphUtil:
 
     def create_graph(self, color_dic, proc_thread):
         """
-         グラフを画像ファイルに出力
-         :param color_dic: 色配列
-         :param proc_thread: 処理中のスレッド
-         :return: ファイルパス
-         """
+        グラフを画像ファイルに出力
+        :param color_dic: 色配列
+        :param proc_thread: 処理中のスレッド
+        :return: ファイルパス
+        """
 
         # 合計
         sum_all = 0
@@ -141,7 +141,6 @@ class GraphUtil:
         # 進捗更新 90
         #self.progress += 5
         #proc_thread.prog_signal.emit(self.progress)
-
 
         # 並べ替え
         sort_colors = sorted(color_dic.items(), key=lambda x: x[1], reverse=True)
@@ -190,7 +189,7 @@ class GraphUtil:
         # FileUtil取得
         file_util = FileUtil()
 
-        result_path = "./result"
+        result_path = "./img/result"
 
         # ディレクトリ作成
         file_util.create_dir(result_path)

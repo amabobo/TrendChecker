@@ -38,7 +38,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>10</y>
+     <y>0</y>
      <width>411</width>
      <height>41</height>
     </rect>
@@ -115,7 +115,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>60</y>
+     <y>70</y>
      <width>411</width>
      <height>311</height>
     </rect>
@@ -141,7 +141,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>380</y>
+     <y>390</y>
      <width>411</width>
      <height>80</height>
     </rect>
@@ -214,6 +214,28 @@
     </item>
    </layout>
   </widget>
+  <widget class="QCheckBox" name="chbMarkClothes">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>40</y>
+     <width>91</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>服 認識</string>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>C:/Users/miosi/Downloads/ベビー服のフリーアイコン.png</normaloff>C:/Users/miosi/Downloads/ベビー服のフリーアイコン.png</iconset>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections>
@@ -265,10 +287,27 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>chbMarkClothes</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>frmMainView</receiver>
+   <slot>clothes_change_toggle()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>50</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>116</x>
+     <y>43</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>file_select_click()</slot>
   <slot>folder_select_click()</slot>
   <slot>graph_display_click()</slot>
+  <slot>clothes_change_toggle()</slot>
  </slots>
 </ui>

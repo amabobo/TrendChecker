@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'TCMainView.ui'
+# Form implementation generated from reading ui file '.\TCMainView.ui'
 #
 # Created by: PyQt5 UI code generator 5.9.2
 #
@@ -21,7 +21,7 @@ class Ui_frmMainView(object):
         icon.addPixmap(QtGui.QPixmap("img/icon/graph1.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         frmMainView.setWindowIcon(icon)
         self.horizontalLayoutWidget = QtWidgets.QWidget(frmMainView)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(10, 10, 411, 41))
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(10, 0, 411, 41))
         font = QtGui.QFont()
         font.setFamily("Meiryo UI")
         self.horizontalLayoutWidget.setFont(font)
@@ -64,7 +64,7 @@ class Ui_frmMainView(object):
         self.btnGraphDisplay.setObjectName("btnGraphDisplay")
         self.headerLayout.addWidget(self.btnGraphDisplay)
         self.horizontalLayoutWidget_2 = QtWidgets.QWidget(frmMainView)
-        self.horizontalLayoutWidget_2.setGeometry(QtCore.QRect(10, 60, 411, 311))
+        self.horizontalLayoutWidget_2.setGeometry(QtCore.QRect(10, 70, 411, 311))
         font = QtGui.QFont()
         font.setFamily("Meiryo UI")
         self.horizontalLayoutWidget_2.setFont(font)
@@ -79,7 +79,7 @@ class Ui_frmMainView(object):
         self.viewMainImage.setObjectName("viewMainImage")
         self.mainImageLayout.addWidget(self.viewMainImage)
         self.horizontalLayoutWidget_3 = QtWidgets.QWidget(frmMainView)
-        self.horizontalLayoutWidget_3.setGeometry(QtCore.QRect(10, 380, 411, 80))
+        self.horizontalLayoutWidget_3.setGeometry(QtCore.QRect(10, 390, 411, 80))
         font = QtGui.QFont()
         font.setFamily("Meiryo UI")
         self.horizontalLayoutWidget_3.setFont(font)
@@ -122,11 +122,21 @@ class Ui_frmMainView(object):
         self.viewMiniImage5.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.viewMiniImage5.setObjectName("viewMiniImage5")
         self.subImageLayout.addWidget(self.viewMiniImage5)
+        self.chbMarkClothes = QtWidgets.QCheckBox(frmMainView)
+        self.chbMarkClothes.setGeometry(QtCore.QRect(10, 40, 91, 21))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.chbMarkClothes.setFont(font)
+        icon4 = QtGui.QIcon()
+        icon4.addPixmap(QtGui.QPixmap("C:/Users/miosi/Downloads/ベビー服のフリーアイコン.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.chbMarkClothes.setIcon(icon4)
+        self.chbMarkClothes.setObjectName("chbMarkClothes")
 
         self.retranslateUi(frmMainView)
         self.btnFileSelect.clicked.connect(frmMainView.file_select_click)
         self.btnFolderSelect.clicked.connect(frmMainView.folder_select_click)
         self.btnGraphDisplay.clicked.connect(frmMainView.graph_display_click)
+        self.chbMarkClothes.toggled['bool'].connect(frmMainView.clothes_change_toggle)
         QtCore.QMetaObject.connectSlotsByName(frmMainView)
 
     def retranslateUi(self, frmMainView):
@@ -135,4 +145,5 @@ class Ui_frmMainView(object):
         self.btnFileSelect.setText(_translate("frmMainView", "ファイル選択"))
         self.btnFolderSelect.setText(_translate("frmMainView", "フォルダ選択"))
         self.btnGraphDisplay.setText(_translate("frmMainView", "グラフ表示"))
+        self.chbMarkClothes.setText(_translate("frmMainView", "服 認識"))
 
